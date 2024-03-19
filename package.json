@@ -2,6 +2,7 @@
   "name": "plered",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@8.11.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
