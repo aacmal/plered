@@ -13,6 +13,8 @@ import {
   ElementRef,
   ReactNode,
   forwardRef,
+  useEffect,
+  useState,
 } from "react";
 
 import { Button } from "./ui/button";
@@ -40,7 +42,21 @@ interface SidebarProps {
 }
 function SidebarContent(props: SidebarProps) {
   const pathname = usePathname();
-  const { minified } = useSidebar();
+  const { minified, setMinified } = useSidebar();
+  const [accordionState, setAccordionState] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (minified) {
+      setAccordionState([]);
+    }
+  }, [minified]);
+
+  useEffect(() => {
+    if (accordionState.length > 0) {
+      setMinified(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accordionState]);
 
   return (
     <div className={props.className}>
@@ -58,9 +74,10 @@ function SidebarContent(props: SidebarProps) {
           PLERED
         </h1>
         <AccordionPrimitive.Root
-          type="single"
-          collapsible
+          type="multiple"
           className="flex flex-col gap-2"
+          value={accordionState}
+          onValueChange={setAccordionState}
         >
           <SidebarLink
             isActive={pathname === "/"}
@@ -71,7 +88,7 @@ function SidebarContent(props: SidebarProps) {
             Dashboard
           </SidebarLink>
           <SidebarSub value="authentication">
-            <SidebarSubTrigger icon={<IconLock />}>
+            <SidebarSubTrigger minified={minified} icon={<IconLock />}>
               Authentication
             </SidebarSubTrigger>
             <SidebarSubContent>
@@ -150,17 +167,34 @@ const SidebarSubTrigger = forwardRef<
   ElementRef<typeof AccordionPrimitive.Trigger>,
   ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
     icon: ReactNode;
+    minified?: boolean;
   }
 >(({ className, children, icon, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
+  <AccordionPrimitive.Header>
     <AccordionPrimitive.Trigger ref={ref} asChild {...props}>
       <Button
-        className="group h-auto w-full justify-center gap-2 py-3 transition-all"
         variant="ghost"
+        className={cn(
+          "group h-auto w-full gap-2 py-3 text-start transition-all",
+          {
+            "lg:gap-2": !props.minified,
+            "lg:gap-0": props.minified,
+          },
+        )}
       >
         {icon}
-        {children}
-        <IconChevronDown className="ml-auto h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+        <span
+          className={cn(
+            "flex w-full items-center overflow-hidden transition-all ease-in-out",
+            {
+              "lg:w-0": props.minified,
+              "lg:w-52": !props.minified,
+            },
+          )}
+        >
+          {children}
+          <IconChevronDown className="ml-auto h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+        </span>
       </Button>
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
@@ -170,15 +204,24 @@ SidebarSubTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 const SidebarSubContent = forwardRef<
   ElementRef<typeof AccordionPrimitive.Content>,
   ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    {...props}
-  >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
-  </AccordionPrimitive.Content>
-));
+>(({ className, children, ...props }, ref) => {
+  const { minified } = useSidebar();
+  return (
+    <AccordionPrimitive.Content
+      ref={ref}
+      className={cn(
+        "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+        {
+          "max-w-52": !minified,
+          "max-w-0": minified,
+        },
+      )}
+      {...props}
+    >
+      <div className={cn("pb-4 pt-0", className)}>{children}</div>
+    </AccordionPrimitive.Content>
+  );
+});
 
 SidebarSubContent.displayName = AccordionPrimitive.Content.displayName;
 
