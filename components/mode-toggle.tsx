@@ -12,51 +12,26 @@ import {
 } from "./ui/tooltip";
 
 export default function ModeToggle() {
-  const { theme, setTheme } = useTheme();
-
-  const renderToggleButton = () => {
-    switch (theme) {
-      case "light":
-        return (
-          <Button variant="ghost" size="icon" onClick={() => setTheme("dark")}>
-            <IconSun />
-          </Button>
-        );
-
-      case "dark":
-        return (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme("system")}
-          >
-            <IconMoon />
-          </Button>
-        );
-
-      default:
-        return (
-          <Button variant="ghost" size="icon" onClick={() => setTheme("light")}>
-            <IconCheese />
-          </Button>
-        );
-    }
-  };
+  const { setTheme } = useTheme();
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger>{renderToggleButton()}</TooltipTrigger>
-        <TooltipContent>
-          <p>
-            {theme === "light"
-              ? "Light mode"
-              : theme === "dark"
-                ? "Dark mode"
-                : "System"}
-          </p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <>
+      <Button
+        className="dark:hidden"
+        variant="ghost"
+        size="icon"
+        onClick={() => setTheme("dark")}
+      >
+        <IconSun />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setTheme("light")}
+        className="hidden dark:inline-flex"
+      >
+        <IconMoon />
+      </Button>
+    </>
   );
 }

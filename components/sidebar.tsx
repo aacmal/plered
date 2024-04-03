@@ -3,22 +3,38 @@
 import { useSidebar } from "@/context/sidebar-ctx";
 import useMediaQuery from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
-import { IconCategoryFilled, IconDashboard } from "@tabler/icons-react";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import {
+  IconCategory,
+  IconCategoryFilled,
+  IconChevronDown,
+  IconDashboard,
+  IconLock,
+  IconLockFilled,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  ComponentProps,
+  ComponentPropsWithRef,
+  ComponentPropsWithoutRef,
+  ElementRef,
+  ReactNode,
+  forwardRef,
+} from "react";
 
 import { Button } from "./ui/button";
 import { Sheet, SheetContent } from "./ui/sheet";
 
 export default function Sidebar() {
   const { open, setOpen } = useSidebar();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   if (!isDesktop) {
     return (
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="left" className="w-4/5 max-w-96 p-2">
-          <SidebarContent className="md:hidden" />
+          <SidebarContent className="lg:hidden" />
         </SheetContent>
       </Sheet>
     );
@@ -49,16 +65,45 @@ function SidebarContent(props: SidebarProps) {
         >
           PLERED
         </h1>
-        <div className="flex flex-col gap-2">
+        <AccordionPrimitive.Root
+          type="single"
+          collapsible
+          className="flex flex-col gap-2"
+        >
           <SidebarLink
             isActive={pathname === "/"}
-            icon={<IconCategoryFilled size={20} />}
+            icon={<IconCategory size={20} />}
             href="/"
             minified={minified}
           >
             Dashboard
           </SidebarLink>
-        </div>
+          <SidebarSub value="authentication">
+            <SidebarSubTrigger icon={<IconLock />}>
+              Authentication
+            </SidebarSubTrigger>
+            <SidebarSubContent>
+              <SidebarSubLink
+                isActive={pathname === "/auth/login/"}
+                href="/auth/login"
+              >
+                Login
+              </SidebarSubLink>
+              <SidebarSubLink
+                isActive={pathname === "/auth/register/"}
+                href="/auth/register"
+              >
+                Register
+              </SidebarSubLink>
+              <SidebarSubLink
+                isActive={pathname === "/auth/forgot-password/"}
+                href="/auth/forgot-password"
+              >
+                Forgot Password
+              </SidebarSubLink>
+            </SidebarSubContent>
+          </SidebarSub>
+        </AccordionPrimitive.Root>
       </div>
     </div>
   );
@@ -67,17 +112,17 @@ function SidebarContent(props: SidebarProps) {
 interface SidebarLinkProps {
   isActive?: boolean;
   minified?: boolean;
-  icon: React.ReactNode;
+  icon: ReactNode;
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 function SidebarLink(props: SidebarLinkProps) {
   return (
     <Button
       variant={props.isActive ? "secondary" : "ghost"}
       className={cn("h-auto w-full justify-center gap-2 py-3 transition-all", {
-        "md:gap-2": !props.minified,
-        "md:gap-0": props.minified,
+        "lg:gap-2": !props.minified,
+        "lg:gap-0": props.minified,
       })}
       asChild
     >
@@ -87,8 +132,8 @@ function SidebarLink(props: SidebarLinkProps) {
           className={cn(
             "block w-full overflow-hidden transition-all ease-in-out",
             {
-              "md:w-0": props.minified,
-              "md:w-52": !props.minified,
+              "lg:w-0": props.minified,
+              "lg:w-52": !props.minified,
             },
           )}
         >
@@ -98,3 +143,67 @@ function SidebarLink(props: SidebarLinkProps) {
     </Button>
   );
 }
+
+const SidebarSub = forwardRef<
+  ElementRef<typeof AccordionPrimitive.Item>,
+  ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>((props, ref) => <AccordionPrimitive.Item ref={ref} {...props} />);
+
+SidebarSub.displayName = "SidebarSub";
+
+const SidebarSubTrigger = forwardRef<
+  ElementRef<typeof AccordionPrimitive.Trigger>,
+  ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
+    icon: ReactNode;
+  }
+>(({ className, children, icon, ...props }, ref) => (
+  <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Trigger ref={ref} asChild {...props}>
+      <Button
+        className="group h-auto w-full justify-center gap-2 py-3 transition-all"
+        variant="ghost"
+      >
+        {icon}
+        {children}
+        <IconChevronDown className="ml-auto h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+      </Button>
+    </AccordionPrimitive.Trigger>
+  </AccordionPrimitive.Header>
+));
+SidebarSubTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+
+const SidebarSubContent = forwardRef<
+  ElementRef<typeof AccordionPrimitive.Content>,
+  ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Content
+    ref={ref}
+    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    {...props}
+  >
+    <div className={cn("pb-4 pt-0", className)}>{children}</div>
+  </AccordionPrimitive.Content>
+));
+
+SidebarSubContent.displayName = AccordionPrimitive.Content.displayName;
+
+interface SidebarSubLinkProps extends ComponentProps<typeof Link> {
+  isActive?: boolean;
+}
+const SidebarSubLink = ({ href, children, isActive }: SidebarSubLinkProps) => {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "ml-7 block rounded-r-md border-l-2 py-1 pl-5 text-sm hover:bg-muted hover:text-primary",
+        {
+          "border-primary text-primary": isActive,
+          "text-muted-foreground": !isActive,
+        },
+      )}
+    >
+      {children}
+    </Link>
+  );
+};
+SidebarSubLink.displayName = "SidebarSubLink";

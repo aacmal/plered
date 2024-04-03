@@ -65,7 +65,7 @@ export default function Notification() {
           </span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="max-w-xs p-2" align="end">
+      <PopoverContent className="max-w-xs p-2" side="top" align="end">
         <ul>
           {notifications.map((notification) => (
             <li

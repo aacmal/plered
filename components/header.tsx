@@ -41,7 +41,7 @@ export default function Header() {
         onClick={() => setMinified((prev) => !prev)}
         variant="ghost"
         size="icon"
-        className="hidden md:inline-flex"
+        className="hidden lg:inline-flex"
       >
         <IconMenu2 />
       </Button>
@@ -49,7 +49,7 @@ export default function Header() {
         onClick={() => setOpen((prev) => !prev)}
         variant="ghost"
         size="icon"
-        className="md:hidden"
+        className="lg:hidden"
       >
         <IconMenu />
       </Button>

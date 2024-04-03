@@ -1,0 +1,5 @@
+.pattern {
+  background-image: linear-gradient(#dedbdb1a 2px, transparent 2px),
+    linear-gradient(to right, #dedbdb1a 2px, transparent 2px);
+  background-size: 38px 38px;
+}
