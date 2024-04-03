@@ -1,20 +1,17 @@
 import ModeToggle from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { DividerWithText } from "@/components/ui/divider";
 import { Input } from "@/components/ui/input";
 import Label from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
 
-export default function LoginPage() {
+import AuthWrapper from "../_components/auth-wrapper";
+import OAuthProviders from "../_components/oauth-providers";
+
+export default function RegisterPage() {
   return (
-    <main>
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-lg font-medium">Register</h1>
-          <p className="font-light">Create an account to get started</p>
-        </div>
-        <ModeToggle />
-      </header>
+    <AuthWrapper title="Register" subtitle="Create an account to get started">
       <form className="mt-8 space-y-5">
         <div className="flex gap-3">
           <div className="w-full space-y-2">
@@ -46,11 +43,13 @@ export default function LoginPage() {
         <Button className="w-full">Register</Button>
         <p className="whitespace-nowrap text-center text-sm">
           Already have an account?{" "}
-          <Link href="/auth/login" className="text-blue-500 hover:underline">
+          <Link href="/login" className="text-blue-500 hover:underline">
             Login here.
           </Link>
         </p>
       </form>
-    </main>
+      <DividerWithText>or continue with</DividerWithText>
+      <OAuthProviders />
+    </AuthWrapper>
   );
 }

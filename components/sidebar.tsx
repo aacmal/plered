@@ -4,19 +4,11 @@ import { useSidebar } from "@/context/sidebar-ctx";
 import useMediaQuery from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import {
-  IconCategory,
-  IconCategoryFilled,
-  IconChevronDown,
-  IconDashboard,
-  IconLock,
-  IconLockFilled,
-} from "@tabler/icons-react";
+import { IconCategory, IconChevronDown, IconLock } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   ComponentProps,
-  ComponentPropsWithRef,
   ComponentPropsWithoutRef,
   ElementRef,
   ReactNode,
@@ -83,23 +75,26 @@ function SidebarContent(props: SidebarProps) {
               Authentication
             </SidebarSubTrigger>
             <SidebarSubContent>
-              <SidebarSubLink
-                isActive={pathname === "/auth/login/"}
-                href="/auth/login"
-              >
+              <SidebarSubLink isActive={pathname === "/login/"} href="/login">
                 Login
               </SidebarSubLink>
               <SidebarSubLink
-                isActive={pathname === "/auth/register/"}
-                href="/auth/register"
+                isActive={pathname === "/register/"}
+                href="/register"
               >
                 Register
               </SidebarSubLink>
               <SidebarSubLink
-                isActive={pathname === "/auth/forgot-password/"}
-                href="/auth/forgot-password"
+                isActive={pathname === "/forgot-password/"}
+                href="/forgot-password"
               >
                 Forgot Password
+              </SidebarSubLink>
+              <SidebarSubLink
+                isActive={pathname === "/forgot-password/"}
+                href="/update-password?token=secret"
+              >
+                Update Password
               </SidebarSubLink>
             </SidebarSubContent>
           </SidebarSub>

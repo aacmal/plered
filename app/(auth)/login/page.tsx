@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button";
+import { DividerWithText } from "@/components/ui/divider";
 import { Input } from "@/components/ui/input";
 import Label from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
 
+import AuthWrapper from "../_components/auth-wrapper";
+import OAuthProviders from "../_components/oauth-providers";
+
 export default function LoginPage() {
   return (
-    <main>
-      <h1 className="text-lg font-medium">Login</h1>
-      <p className="font-light">Enter your credentials to login</p>
+    <AuthWrapper title="Login" subtitle="Enter your credentials to login">
       <form className="mt-8 space-y-5">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -25,23 +27,22 @@ export default function LoginPage() {
               Remember me
             </Label>
           </div>
-          <Link href="/auth/forgot-password" className="text-sm">
+          <Link href="/forgot-password" className="text-sm hover:underline">
             Forgot password?
           </Link>
         </div>
         <div className="flex items-center gap-4">
           <p className="whitespace-nowrap text-sm">
             Don&apos;t have an account?{" "}
-            <Link
-              href="/auth/register"
-              className="text-blue-500 hover:underline"
-            >
+            <Link href="/register" className="text-blue-500 hover:underline">
               Register here.
             </Link>
           </p>
           <Button className="w-full">Login</Button>
         </div>
       </form>
-    </main>
+      <DividerWithText>or continue with</DividerWithText>
+      <OAuthProviders />
+    </AuthWrapper>
   );
 }
