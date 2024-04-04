@@ -65,7 +65,7 @@ export default function Header() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>
-              <Link href="/profile">
+              <Link href="/account">
                 <IconUser size={16} className="mr-2" />
                 Ucluk Banana
               </Link>
