@@ -27,21 +27,21 @@ export default function LoginPage() {
               Remember me
             </Label>
           </div>
-          <Link href="/forgot-password" className="text-sm hover:underline">
+          <Link href="/forgot-password" className="link text-sm">
             Forgot password?
           </Link>
         </div>
         <div className="flex items-center gap-4">
           <p className="whitespace-nowrap text-sm">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-blue-500 hover:underline">
+            <Link href="/register" className="link">
               Register here.
             </Link>
           </p>
           <Button className="w-full">Login</Button>
         </div>
       </form>
-      <DividerWithText>or continue with</DividerWithText>
+      <DividerWithText className="bg-card">or continue with</DividerWithText>
       <OAuthProviders />
     </AuthWrapper>
   );

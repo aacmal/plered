@@ -131,7 +131,7 @@ interface SidebarLinkProps {
 function SidebarLink(props: SidebarLinkProps) {
   return (
     <Button
-      variant={props.isActive ? "secondary" : "ghost"}
+      variant={props.isActive ? "default" : "ghost"}
       className={cn("h-auto w-full justify-center gap-2 py-3 transition-all", {
         "lg:gap-2": !props.minified,
         "lg:gap-0": props.minified,

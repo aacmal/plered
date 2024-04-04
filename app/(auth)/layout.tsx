@@ -18,7 +18,7 @@ interface Props {
 export default function AuthLayout({ children }: Props) {
   return (
     <div className={cn(style.pattern, "grid min-h-screen place-items-center")}>
-      <div className="w-[96%] max-w-lg rounded-2xl border bg-background p-6 shadow-lg">
+      <div className="w-[96%] max-w-lg rounded-2xl border bg-card p-6 shadow-lg">
         {children}
       </div>
     </div>

@@ -39,7 +39,7 @@ function NavLink(props: NavLinkProps) {
           "border-transparent py-1": !props.isActive,
         })}
         asChild
-        variant={props.isActive ? "secondary" : "ghost"}
+        variant={props.isActive ? "default" : "ghost"}
         size="sm"
       >
         <Link href={props.href}>{props.children}</Link>

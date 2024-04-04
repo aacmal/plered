@@ -17,6 +17,9 @@ const config = {
         "2xl": "1400px",
       },
     },
+    link: {
+      decoration: "underline",
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
