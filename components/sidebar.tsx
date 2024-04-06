@@ -34,7 +34,9 @@ export default function Sidebar() {
     );
   }
 
-  return <SidebarContent className="hidden border-r lg:block" />;
+  return (
+    <SidebarContent className="sticky top-0 hidden h-screen border-r lg:block" />
+  );
 }
 
 interface SidebarProps {

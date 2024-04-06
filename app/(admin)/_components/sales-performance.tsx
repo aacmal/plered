@@ -72,7 +72,7 @@ export default function SalesPerformanceChart() {
   const [interval, setInterval] = useState<Interval>("weekly");
   const data = interval === "weekly" ? weeklyData : monthlyData;
   return (
-    <Card className="h-96 overflow-hidden p-0 xl:flex-1">
+    <Card className="h-64 overflow-hidden p-0 md:h-96 xl:flex-1">
       <div className="flex items-center justify-between p-4">
         <h2 className="text-lg font-medium">Sales Performance</h2>
         <Select

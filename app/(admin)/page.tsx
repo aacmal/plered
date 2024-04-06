@@ -9,6 +9,7 @@ import {
 
 import BestSellers from "./_components/best-sellers";
 import MetricCard from "./_components/metric-card";
+import RecentOrders from "./_components/recent-orders";
 import SalesPerformanceChart from "./_components/sales-performance";
 
 export default function AdminIndex() {
@@ -48,6 +49,7 @@ export default function AdminIndex() {
         <SalesPerformanceChart />
         <BestSellers className="w-full xl:w-1/3" />
       </div>
+      <RecentOrders />
     </Wrapper>
   );
 }
