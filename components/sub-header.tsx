@@ -15,7 +15,7 @@ export default function SubHeader() {
   const paths = pathname.split("/").filter(Boolean);
 
   return (
-    <div className="flex items-center justify-between px-5 py-3">
+    <div className="flex items-center justify-between px-5 py-3 pb-0">
       <h1 className="text-lg font-medium capitalize xl:text-xl">
         {paths[0] ?? "Dashboard"}
       </h1>

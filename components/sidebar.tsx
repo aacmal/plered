@@ -169,7 +169,7 @@ const SidebarSubTrigger = forwardRef<
     icon: ReactNode;
     minified?: boolean;
   }
->(({ className, children, icon, ...props }, ref) => (
+>(({ className, children, icon, minified, ...props }, ref) => (
   <AccordionPrimitive.Header>
     <AccordionPrimitive.Trigger ref={ref} asChild {...props}>
       <Button
@@ -177,8 +177,8 @@ const SidebarSubTrigger = forwardRef<
         className={cn(
           "group h-auto w-full gap-2 py-3 text-start transition-all",
           {
-            "lg:gap-2": !props.minified,
-            "lg:gap-0": props.minified,
+            "lg:gap-2": !minified,
+            "lg:gap-0": minified,
           },
         )}
       >
@@ -187,8 +187,8 @@ const SidebarSubTrigger = forwardRef<
           className={cn(
             "flex w-full items-center overflow-hidden transition-all ease-in-out",
             {
-              "lg:w-0": props.minified,
-              "lg:w-52": !props.minified,
+              "lg:w-0": minified,
+              "lg:w-52": !minified,
             },
           )}
         >
