@@ -83,10 +83,10 @@ export default function Notification() {
                     month: "short",
                   })}
                 </span>
-                <h4 className="line-clamp-1 text-sm font-semibold">
+                <h4 className="line-clamp-1 text-sm font-medium">
                   {notification.title}
                 </h4>
-                <p className="line-clamp-1 text-xs">
+                <p className="line-clamp-1 text-sm">
                   {notification.description}
                 </p>
               </div>
@@ -94,7 +94,7 @@ export default function Notification() {
           ))}
         </ul>
         <hr className="my-2" />
-        <Button variant="ghost" size="sm" asChild className="w-full text-xs">
+        <Button variant="ghost" size="sm" asChild className="w-full text-sm">
           <Link href="/notifications">View all notifications</Link>
         </Button>
       </PopoverContent>
