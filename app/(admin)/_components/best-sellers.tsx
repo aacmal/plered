@@ -92,7 +92,7 @@ function List(props: ListProps) {
   }).format(props.revenue);
   return (
     <li className="flex items-center gap-2 py-2">
-      <Avatar className="rounded-lg">
+      <Avatar className="rounded-xl">
         <AvatarImage src={props.avatar} />
         <AvatarFallback className="line-clamp-1 rounded-none text-xs">
           {props.name}
