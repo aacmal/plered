@@ -99,7 +99,7 @@ function List(props: ListProps) {
         </AvatarFallback>
       </Avatar>
       <div className="flex flex-col gap-1">
-        <p className="font-medium">{props.name}</p>
+        <p className="">{props.name}</p>
         <p className="text-sm text-gray-500">{props.company}</p>
       </div>
       <div className="ml-auto flex flex-col items-end gap-1">
