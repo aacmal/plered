@@ -36,7 +36,7 @@ export default function Header() {
   const { setMinified, setOpen } = useSidebar();
 
   return (
-    <header className="flex items-center justify-between border-b bg-card p-3 pr-5">
+    <header className="sticky top-0 z-50 flex items-center justify-between border-b bg-card p-3 pr-5">
       <Button
         onClick={() => setMinified((prev) => !prev)}
         variant="ghost"

@@ -4,7 +4,12 @@ import { useSidebar } from "@/context/sidebar-ctx";
 import useMediaQuery from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { IconCategory, IconChevronDown, IconLock } from "@tabler/icons-react";
+import {
+  IconCategory,
+  IconChevronDown,
+  IconLock,
+  IconVocabulary,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -88,6 +93,14 @@ function SidebarContent(props: SidebarProps) {
             minified={minified}
           >
             Dashboard
+          </SidebarLink>
+          <SidebarLink
+            isActive={pathname === "/orders/"}
+            icon={<IconVocabulary size={20} />}
+            href="/orders"
+            minified={minified}
+          >
+            Orders
           </SidebarLink>
           <SidebarSub value="authentication">
             <SidebarSubTrigger minified={minified} icon={<IconLock />}>
