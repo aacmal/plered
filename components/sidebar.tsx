@@ -167,7 +167,7 @@ function SidebarLink(props: SidebarLinkProps) {
             "block w-full overflow-hidden transition-all ease-in-out",
             {
               "lg:w-0": props.minified,
-              "lg:w-44": !props.minified,
+              "lg:w-52": !props.minified,
             },
           )}
         >
@@ -210,7 +210,7 @@ const SidebarSubTrigger = forwardRef<
             "flex w-full items-center overflow-hidden transition-all ease-in-out",
             {
               "lg:w-0": minified,
-              "lg:w-44": !minified,
+              "lg:w-52": !minified,
             },
           )}
         >
@@ -234,7 +234,7 @@ const SidebarSubContent = forwardRef<
       className={cn(
         "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
         {
-          "max-w-44": !minified,
+          "max-w-52": !minified,
           "max-w-0": minified,
         },
       )}
