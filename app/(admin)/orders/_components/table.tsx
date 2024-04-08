@@ -246,7 +246,7 @@ const DUMMY_RECENT_ORDERS = [
   },
 ] as Order[];
 
-export default function Table() {
+export default function OrdersTable() {
   return (
     <Card>
       <DataTable columns={columns} data={DUMMY_RECENT_ORDERS} />

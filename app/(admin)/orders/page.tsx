@@ -4,13 +4,13 @@ import Wrapper from "@/components/wrapper";
 
 import { Order, columns } from "./_components/columns";
 import Filter from "./_components/filter";
-import Table from "./_components/table";
+import OrdersTable from "./_components/table";
 
 export default function OrdersPage() {
   return (
-    <Wrapper className="space-y-2">
+    <Wrapper className="space-y-4">
       <Filter />
-      <Table />
+      <OrdersTable />
     </Wrapper>
   );
 }

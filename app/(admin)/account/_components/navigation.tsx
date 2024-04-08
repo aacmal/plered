@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 export default function AccountNavigation() {
   const pathname = usePathname();
 
+  console.log(pathname);
+
   return (
     <nav className="sticky top-3 h-fit w-full space-y-2 rounded-lg border bg-card p-3 text-sm shadow sm:max-w-72">
       <ul className="space-y-2">

@@ -21,8 +21,8 @@ export default function Filter() {
   });
 
   return (
-    <div className="flex flex-col-reverse justify-between gap-3 lg:flex-row">
-      <div className="flex w-full items-center gap-2 lg:max-w-xs">
+    <div className="flex flex-col-reverse justify-between gap-3 md:flex-row">
+      <div className="flex w-full items-center gap-2 md:max-w-xs">
         <IconSearch className="text-muted-foreground" />
         <Input placeholder="Search orders" />
       </div>
@@ -31,9 +31,9 @@ export default function Filter() {
           <PopoverTrigger asChild>
             <Button
               id="date"
-              variant="secondary"
+              variant="outline"
               className={cn(
-                "w-full justify-start text-left font-normal lg:w-fit",
+                "w-full justify-start bg-card text-left font-normal shadow-sm lg:w-fit",
                 !date && "text-muted-foreground",
               )}
             >

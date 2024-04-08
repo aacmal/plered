@@ -17,6 +17,7 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 
 const statusColors = {
   processing:
@@ -138,13 +139,15 @@ export const columns: ColumnDef<Order>[] = [
               Copy order ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            {/* <DropdownMenuItem>
               <IconUser className="mr-2 h-4 w-4" />
               View customer
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <IconFileDescription className="mr-2 h-4 w-4" />
-              View order details
+            </DropdownMenuItem> */}
+            <DropdownMenuItem asChild>
+              <Link href={`/orders/${order.orderId}`}>
+                <IconFileDescription className="mr-2 h-4 w-4" />
+                View order details
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
