@@ -54,6 +54,7 @@ export default function ChartCard(props: Props) {
               />
             </linearGradient>
           </defs>
+          {/* @ts-ignore */}
           <Tooltip content={renderAreaTooltip} />
           <Area
             type="monotone"
