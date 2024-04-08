@@ -1,7 +1,15 @@
 import Wrapper from "@/components/wrapper";
+import { Metadata } from "next";
 import { ReactNode } from "react";
 
 import AccountNavigation from "./_components/navigation";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s - Account",
+    default: "Account",
+  },
+};
 
 interface Props {
   children: ReactNode;

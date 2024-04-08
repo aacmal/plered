@@ -127,7 +127,7 @@ function SidebarContent(props: SidebarProps) {
               </SidebarSubLink>
               <SidebarSubLink
                 isActive={pathname === "/forgot-password/"}
-                href="/update-password?token=secret"
+                href="/reset-password?token=secret"
               >
                 Update Password
               </SidebarSubLink>

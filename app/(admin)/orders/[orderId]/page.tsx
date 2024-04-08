@@ -30,6 +30,7 @@ import {
   IconTruck,
   IconUser,
 } from "@tabler/icons-react";
+import { Metadata } from "next";
 
 const statusColors = {
   processing: "bg-yellow-500",
@@ -84,6 +85,11 @@ const DUMMY_DATA = {
       total: 14.99,
     },
   ],
+};
+
+export const metadata: Metadata = {
+  title: "Order Detail",
+  description: "Print and manage order detail here",
 };
 
 interface Props {

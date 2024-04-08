@@ -1,10 +1,13 @@
-import Card from "@/components/ui/card";
-import { DataTable } from "@/components/ui/data-table";
 import Wrapper from "@/components/wrapper";
+import { Metadata } from "next";
 
-import { Order, columns } from "./_components/columns";
 import Filter from "./_components/filter";
 import OrdersTable from "./_components/table";
+
+export const metadata: Metadata = {
+  title: "Orders",
+  description: "Manage all the orders placed by customers",
+};
 
 export default function OrdersPage() {
   return (

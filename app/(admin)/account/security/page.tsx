@@ -1,10 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Label from "@/components/ui/label";
+import { Metadata } from "next";
 
 import ChangePasswordSection from "./_components/change-password";
 import SessionSection from "./_components/session";
 import TwoFASection from "./_components/two-fa";
+
+export const metadata: Metadata = {
+  title: "Security",
+  description:
+    "Change your password, enable two-factor authentication, and more.",
+};
 
 export default function AccountSecurityPage() {
   return (

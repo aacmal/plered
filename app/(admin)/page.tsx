@@ -6,11 +6,17 @@ import {
   IconCoins,
   IconRosetteDiscount,
 } from "@tabler/icons-react";
+import { Metadata } from "next";
 
 import BestSellers from "./_components/best-sellers";
 import MetricCard from "./_components/metric-card";
 import RecentOrders from "./_components/recent-orders";
 import SalesPerformanceChart from "./_components/sales-performance";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Admin dashboard for managing the store",
+};
 
 export default function AdminIndex() {
   return (

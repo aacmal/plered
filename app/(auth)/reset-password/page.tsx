@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Label from "@/components/ui/label";
+import { Metadata } from "next";
 
 import AuthWrapper from "../_components/auth-wrapper";
+
+export const metadata: Metadata = {
+  title: "Reset Password",
+  description: "Reset your password account using token send to your email",
+};
 
 interface Props {
   searchParams: {

@@ -1,4 +1,5 @@
 import Card from "@/components/ui/card";
+import { Metadata } from "next";
 
 import List from "./_components/list";
 
@@ -130,6 +131,11 @@ const DUMMY_DATA = [
     read: true,
   },
 ];
+
+export const metadata: Metadata = {
+  title: "All Notifications",
+  description: "View all your notifications",
+};
 
 interface Props {
   searchParams: {

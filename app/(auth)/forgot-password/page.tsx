@@ -1,9 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Label from "@/components/ui/label";
+import { Metadata } from "next";
 import Link from "next/link";
 
 import AuthWrapper from "../_components/auth-wrapper";
+
+export const metadata: Metadata = {
+  title: "Forgot Password",
+  description: "Forgot your password? Reset it here",
+};
 
 export default function ForgotPasswordPage() {
   return (
@@ -11,7 +17,7 @@ export default function ForgotPasswordPage() {
       title="Forgot Password"
       subtitle="Enter your email to reset your password"
     >
-      <form action="/update-password?token=secret" className="mt-8 space-y-5">
+      <form action="/reset-password?token=secret" className="mt-8 space-y-5">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input id="email" placeholder="your@email.co" type="email" />
