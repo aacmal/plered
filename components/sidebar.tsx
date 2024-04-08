@@ -95,7 +95,7 @@ function SidebarContent(props: SidebarProps) {
             Dashboard
           </SidebarLink>
           <SidebarLink
-            isActive={pathname === "/orders/"}
+            isActive={pathname.includes("orders")}
             icon={<IconVocabulary size={20} />}
             href="/orders"
             minified={minified}
@@ -103,7 +103,10 @@ function SidebarContent(props: SidebarProps) {
             Orders
           </SidebarLink>
           <SidebarSub value="authentication">
-            <SidebarSubTrigger minified={minified} icon={<IconLock />}>
+            <SidebarSubTrigger
+              minified={minified}
+              icon={<IconLock size={20} />}
+            >
               Authentication
             </SidebarSubTrigger>
             <SidebarSubContent>
@@ -147,10 +150,14 @@ function SidebarLink(props: SidebarLinkProps) {
   return (
     <Button
       variant={props.isActive ? "default" : "ghost"}
-      className={cn("h-auto w-full justify-center gap-2 py-3 transition-all", {
-        "lg:gap-2": !props.minified,
-        "lg:gap-0": props.minified,
-      })}
+      className={cn(
+        "h-auto w-full justify-center gap-2 rounded-lg py-3 transition-all",
+        {
+          "lg:gap-2": !props.minified,
+          "lg:gap-0": props.minified,
+          "text-muted-foreground": !props.isActive,
+        },
+      )}
       asChild
     >
       <Link href={props.href}>
@@ -160,7 +167,7 @@ function SidebarLink(props: SidebarLinkProps) {
             "block w-full overflow-hidden transition-all ease-in-out",
             {
               "lg:w-0": props.minified,
-              "lg:w-52": !props.minified,
+              "lg:w-44": !props.minified,
             },
           )}
         >
@@ -190,7 +197,7 @@ const SidebarSubTrigger = forwardRef<
       <Button
         variant="ghost"
         className={cn(
-          "group h-auto w-full gap-2 py-3 text-start transition-all",
+          "group h-auto w-full gap-2 py-3 text-start text-muted-foreground transition-all data-[state=open]:text-primary",
           {
             "lg:gap-2": !minified,
             "lg:gap-0": minified,
@@ -203,7 +210,7 @@ const SidebarSubTrigger = forwardRef<
             "flex w-full items-center overflow-hidden transition-all ease-in-out",
             {
               "lg:w-0": minified,
-              "lg:w-52": !minified,
+              "lg:w-44": !minified,
             },
           )}
         >
@@ -227,7 +234,7 @@ const SidebarSubContent = forwardRef<
       className={cn(
         "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
         {
-          "max-w-52": !minified,
+          "max-w-44": !minified,
           "max-w-0": minified,
         },
       )}
