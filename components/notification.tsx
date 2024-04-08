@@ -18,6 +18,8 @@ const notifications = [
     type: "message",
     title: "New message",
     description: "You have a new message from Ucluk Banana",
+    important: true,
+    read: false,
   },
   {
     id: 2,
@@ -25,6 +27,8 @@ const notifications = [
     type: "security",
     title: "Security alert",
     description: "Your account password has been updated",
+    important: false,
+    read: true,
   },
   {
     id: 3,
@@ -32,6 +36,8 @@ const notifications = [
     type: "user",
     title: "Your account has been kyc verified",
     description: "You can now deposit and withdraw funds",
+    important: false,
+    read: true,
   },
   {
     id: 4,
@@ -39,22 +45,24 @@ const notifications = [
     type: "system",
     title: "Server maintenance",
     description: "We will be performing server maintenance on 12th June",
+    important: false,
+    read: true,
   },
 ];
 
+export function renderNotificationIcon(type: NotificationType) {
+  switch (type) {
+    case "message":
+      return <IconMessage size={22} />;
+    case "security":
+      return <IconLock size={22} />;
+    case "user":
+      return <IconUser size={22} />;
+    case "system":
+      return <IconSettings size={22} />;
+  }
+}
 export default function Notification() {
-  const renderNotificationIcon = (type: NotificationType) => {
-    switch (type) {
-      case "message":
-        return <IconMessage size={22} />;
-      case "security":
-        return <IconLock size={22} />;
-      case "user":
-        return <IconUser size={22} />;
-      case "system":
-        return <IconSettings size={22} />;
-    }
-  };
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -95,7 +103,7 @@ export default function Notification() {
         </ul>
         <hr className="my-2" />
         <Button variant="ghost" size="sm" asChild className="w-full text-sm">
-          <Link href="/notifications">View all notifications</Link>
+          <Link href="/notification">View all notifications</Link>
         </Button>
       </PopoverContent>
     </Popover>
