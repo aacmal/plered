@@ -13,7 +13,7 @@ export default function Wrapper({ width = "min", children, className }: Props) {
         "relative w-screen p-3 duration-300 animate-in fade-in-50 md:w-full lg:p-6",
         {
           "max-w-full": width === "max",
-          "mx-auto max-w-[1400px]": width === "min",
+          "mx-auto max-w-7xl": width === "min",
         },
         className,
       )}
