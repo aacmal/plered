@@ -1,5 +1,6 @@
+import type { NotificationType } from "@/components/notification";
 import Card from "@/components/ui/card";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import List from "./_components/list";
 
@@ -164,7 +165,7 @@ export default function AllNotificationPage(props: Props) {
         {filteredData.map((notification) => (
           <List
             key={notification.id}
-            type={notification.type as any}
+            type={notification.type as NotificationType}
             createdAt={notification.createdAt}
             title={notification.title}
             description={notification.description}

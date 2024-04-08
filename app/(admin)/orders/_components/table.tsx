@@ -1,7 +1,8 @@
 import Card from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 
-import { Order, columns } from "./columns";
+import type { Order } from "./columns";
+import { columns } from "./columns";
 
 const DUMMY_RECENT_ORDERS = [
   {

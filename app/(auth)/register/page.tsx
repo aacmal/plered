@@ -1,10 +1,9 @@
-import ModeToggle from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { DividerWithText } from "@/components/ui/divider";
 import { Input } from "@/components/ui/input";
 import Label from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import AuthWrapper from "../_components/auth-wrapper";

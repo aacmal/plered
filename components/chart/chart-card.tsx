@@ -3,7 +3,6 @@
 import { SelectValue } from "@radix-ui/react-select";
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { renderAreaTooltip } from "./area-chart";
 import { HEX_COLOR } from "./constant";
@@ -54,6 +53,7 @@ export default function ChartCard(props: Props) {
               />
             </linearGradient>
           </defs>
+          {/* @ts-expect-error IDK */}
           <Tooltip content={renderAreaTooltip} />
           <Area
             type="monotone"

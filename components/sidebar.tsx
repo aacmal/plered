@@ -12,15 +12,13 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
+import type {
   ComponentProps,
   ComponentPropsWithoutRef,
   ElementRef,
   ReactNode,
-  forwardRef,
-  useEffect,
-  useState,
 } from "react";
+import { forwardRef, useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
 import { Sheet, SheetContent } from "./ui/sheet";
@@ -191,7 +189,7 @@ const SidebarSubTrigger = forwardRef<
     icon: ReactNode;
     minified?: boolean;
   }
->(({ className, children, icon, minified, ...props }, ref) => (
+>(({ children, icon, minified, ...props }, ref) => (
   <AccordionPrimitive.Header>
     <AccordionPrimitive.Trigger ref={ref} asChild {...props}>
       <Button

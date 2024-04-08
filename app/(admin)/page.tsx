@@ -1,4 +1,3 @@
-import ChartCard from "@/components/chart/chart-card";
 import Wrapper from "@/components/wrapper";
 import {
   IconBasket,
@@ -6,7 +5,7 @@ import {
   IconCoins,
   IconRosetteDiscount,
 } from "@tabler/icons-react";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import BestSellers from "./_components/best-sellers";
 import MetricCard from "./_components/metric-card";

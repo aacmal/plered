@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { Metadata, Viewport } from "next";
-import { ReactNode } from "react";
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 
 import style from "./layout.module.css";
 

@@ -8,9 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { ColumnDef, SortingState } from "@tanstack/react-table";
 import {
-  ColumnDef,
-  SortingState,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,

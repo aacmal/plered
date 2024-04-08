@@ -1,5 +1,5 @@
 import ModeToggle from "@/components/mode-toggle";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface Props {
   className?: string;

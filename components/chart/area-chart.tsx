@@ -1,6 +1,6 @@
 "use client";
 
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import Card from "../ui/card";
 import { HEX_COLOR } from "./constant";
@@ -74,9 +74,8 @@ export const RenderAreaChart = ({
             />
           </linearGradient>
         </defs>
-        {/* @ts-ignore */}
+        {/* @ts-expect-error IDK */}
         <Tooltip content={renderAreaTooltip} />
-        {/* <XAxis /> */}
         <Area
           type="monotone"
           fillOpacity={0.5}

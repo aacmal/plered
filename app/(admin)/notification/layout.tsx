@@ -1,4 +1,3 @@
-import Card from "@/components/ui/card";
 import Wrapper from "@/components/wrapper";
 
 import NavigationNotificationPage from "./_components/navigation";

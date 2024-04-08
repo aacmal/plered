@@ -1,5 +1,5 @@
 import Wrapper from "@/components/wrapper";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import Filter from "./_components/filter";
 import OrdersTable from "./_components/table";

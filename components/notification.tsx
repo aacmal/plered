@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
-type NotificationType = "message" | "security" | "user" | "system";
+export type NotificationType = "message" | "security" | "user" | "system";
 const notifications = [
   {
     id: 1,

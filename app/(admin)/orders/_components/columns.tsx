@@ -14,9 +14,8 @@ import {
   IconClipboardList,
   IconDots,
   IconFileDescription,
-  IconUser,
 } from "@tabler/icons-react";
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
 const statusColors = {
@@ -103,16 +102,15 @@ export const columns: ColumnDef<Order>[] = [
       );
     },
     cell: ({ row }) => {
-      const status = row.getValue("status") as Order["status"];
-
+      const status = row.getValue("status");
       return (
         <span
           className={cn(
             "inline-block rounded-full px-2 py-1 text-center text-xs font-medium",
-            statusColors[status],
+            statusColors[status as Order["status"]],
           )}
         >
-          {status}
+          {status as string}
         </span>
       );
     },

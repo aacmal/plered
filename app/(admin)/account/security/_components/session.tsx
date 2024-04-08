@@ -37,7 +37,7 @@ interface SessionItemProps {
   lastActive: Date;
 }
 function SessionItem(props: SessionItemProps) {
-  const { os, browser, device } = new UAParser(props.ua).getResult();
+  const { os, browser } = new UAParser(props.ua).getResult();
 
   return (
     <li className="py-3">

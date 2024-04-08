@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import ChangePasswordSection from "./_components/change-password";
 import SessionSection from "./_components/session";

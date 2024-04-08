@@ -30,7 +30,7 @@ import {
   IconTruck,
   IconUser,
 } from "@tabler/icons-react";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 const statusColors = {
   processing: "bg-yellow-500",
