@@ -8,6 +8,7 @@ import {
   IconCategory,
   IconChevronDown,
   IconLock,
+  IconMessage,
   IconVocabulary,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -91,6 +92,14 @@ function SidebarContent(props: SidebarProps) {
             minified={minified}
           >
             Dashboard
+          </SidebarLink>
+          <SidebarLink
+            isActive={pathname.includes("messages")}
+            icon={<IconMessage size={20} />}
+            href="/messages"
+            minified={minified}
+          >
+            Messages
           </SidebarLink>
           <SidebarLink
             isActive={pathname.includes("orders")}
