@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { addDays, format } from "date-fns";
 import { useState } from "react";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 
 export default function Filter() {
   const [date, setDate] = useState<DateRange | undefined>({

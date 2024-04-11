@@ -1,4 +1,6 @@
+import type { NotificationType } from "@/components/notification";
 import Card from "@/components/ui/card";
+import type { Metadata } from "next";
 
 import List from "./_components/list";
 
@@ -131,6 +133,11 @@ const DUMMY_DATA = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "All Notifications",
+  description: "View all your notifications",
+};
+
 interface Props {
   searchParams: {
     category: string;
@@ -158,7 +165,7 @@ export default function AllNotificationPage(props: Props) {
         {filteredData.map((notification) => (
           <List
             key={notification.id}
-            type={notification.type as any}
+            type={notification.type as NotificationType}
             createdAt={notification.createdAt}
             title={notification.title}
             description={notification.description}

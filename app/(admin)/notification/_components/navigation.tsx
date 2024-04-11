@@ -15,9 +15,9 @@ import { Suspense } from "react";
 
 export default function NavigationNotificationPage() {
   return (
-    <Suspense>
-      <Card className="group sticky top-20 h-fit w-full sm:w-64">
-        <h2 className="font-medium text-muted-foreground">Filter</h2>
+    <Card className="group sticky top-20 h-fit w-full sm:w-64">
+      <h2 className="font-medium text-muted-foreground">Filter</h2>
+      <Suspense>
         <ul className="max-h-0 space-y-px overflow-hidden transition-all ease-in-out group-hover:max-h-44 sm:max-h-max">
           <li>
             <Link>
@@ -44,8 +44,8 @@ export default function NavigationNotificationPage() {
             </Link>
           </li>
         </ul>
-      </Card>
-    </Suspense>
+      </Suspense>
+    </Card>
   );
 }
 

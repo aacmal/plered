@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Label from "@/components/ui/label";
+import type { Metadata } from "next";
 
 import AuthWrapper from "../_components/auth-wrapper";
+
+export const metadata: Metadata = {
+  title: "Reset Password",
+  description: "Reset your password account using token send to your email",
+};
 
 interface Props {
   searchParams: {
@@ -14,9 +20,9 @@ const DUMMY_TOKEN = "secret";
 export default function UpdatePasswordPage(props: Props) {
   const { token } = props.searchParams;
 
-  // if (token !== DUMMY_TOKEN) {
-  //   throw new Error("Invalid token");
-  // }
+  if (token !== DUMMY_TOKEN) {
+    throw new Error("Invalid token");
+  }
   return (
     <AuthWrapper
       title="Update Password"
