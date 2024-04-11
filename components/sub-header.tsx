@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Fragment } from "react";
 
 export default function SubHeader() {
   const pathname = usePathname();
@@ -29,8 +30,8 @@ export default function SubHeader() {
               return acc;
             });
             return (
-              <>
-                <BreadcrumbItem key={path}>
+              <Fragment key={path}>
+                <BreadcrumbItem>
                   <BreadcrumbLink
                     className="max-w-32 truncate capitalize"
                     asChild
@@ -39,7 +40,7 @@ export default function SubHeader() {
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 {index < paths.length - 1 && <BreadcrumbSeparator />}
-              </>
+              </Fragment>
             );
           })}
         </BreadcrumbList>
