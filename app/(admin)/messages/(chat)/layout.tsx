@@ -6,7 +6,7 @@ export default function MessagesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-1 gap-3 p-3">
+    <div className="flex flex-1 gap-3 p-3 pb-0">
       <MessagesNavigation />
       {children}
     </div>

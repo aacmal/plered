@@ -1,6 +1,9 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 interface Props {
   id: string;
@@ -11,11 +14,15 @@ interface Props {
 }
 export default function ConversationList(props: Props) {
   const time = props.time.toLocaleDateString();
+  const conversationId = useParams().conversationId as string;
+
+  const isCurrent = conversationId === props.id;
+
   return (
-    <li>
+    <li className="py-1">
       <Button
-        className="h-auto w-full justify-start gap-3"
-        variant="ghost"
+        className="h-auto w-full justify-start gap-3 border border-transparent hover:border-primary/50"
+        variant={isCurrent ? "secondary" : "ghost"}
         asChild
       >
         <Link href={`/messages/${props.id}`}>
@@ -25,7 +32,7 @@ export default function ConversationList(props: Props) {
           </Avatar>
           <div className="flex w-full flex-col gap-2">
             <div className="flex w-full justify-between">
-              <p>{props.name}</p>
+              <p className="max-w-32 truncate">{props.name}</p>
               <p className="text-xs font-light">{time}</p>
             </div>
             <p className="font-normal text-muted-foreground">

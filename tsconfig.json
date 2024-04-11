@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "dist/types/**/*.ts"
+    "dist/types/**/*.ts",
+    "app/(admin)/messages/[conversationId]/_components"
   ],
   "exclude": ["node_modules"]
 }
