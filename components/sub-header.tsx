@@ -15,7 +15,7 @@ export default function SubHeader() {
   const paths = pathname.split("/").filter(Boolean);
 
   return (
-    <div className="sticky top-16 flex items-center justify-between bg-inherit px-5 py-3 pb-0">
+    <div className="flex items-center justify-between bg-inherit px-5 py-3 pb-0">
       <h1 className="text-lg font-semibold capitalize text-secondary-foreground lg:text-2xl">
         {paths[0] ?? "Dashboard"}
       </h1>
@@ -31,7 +31,10 @@ export default function SubHeader() {
             return (
               <>
                 <BreadcrumbItem key={path}>
-                  <BreadcrumbLink className="capitalize" asChild>
+                  <BreadcrumbLink
+                    className="max-w-32 truncate capitalize"
+                    asChild
+                  >
                     <Link href={`/${p}`}>{path}</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
