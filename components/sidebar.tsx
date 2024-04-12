@@ -52,6 +52,14 @@ function SidebarContent(props: SidebarProps) {
   const [accordionState, setAccordionState] = useState<string[]>([]);
 
   useEffect(() => {
+    if (pathname.includes("authentication") || pathname.includes("pages")) {
+      const path = pathname.split("/")[1];
+      setAccordionState([path]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (minified) {
       setAccordionState([]);
     }
@@ -137,6 +145,40 @@ function SidebarContent(props: SidebarProps) {
                 href="/reset-password?token=secret"
               >
                 Update Password
+              </SidebarSubLink>
+            </SidebarSubContent>
+          </SidebarSub>
+          <SidebarSub value="pages">
+            <SidebarSubTrigger
+              minified={minified}
+              icon={<IconLock size={20} />}
+            >
+              Pages
+            </SidebarSubTrigger>
+            <SidebarSubContent>
+              <SidebarSubLink
+                isActive={pathname === "/pages/error/"}
+                href="/pages/error"
+              >
+                Error
+              </SidebarSubLink>
+              <SidebarSubLink
+                isActive={pathname === "/pages/error-500/"}
+                href="/pages/error-500"
+              >
+                500 (Internal Server Error)
+              </SidebarSubLink>
+              <SidebarSubLink
+                isActive={pathname === "/pages/error-404/"}
+                href="/pages/error-404"
+              >
+                404 (Not Found)
+              </SidebarSubLink>
+              <SidebarSubLink
+                isActive={pathname === "/pages/error-400/"}
+                href="/pages/error-400"
+              >
+                400 (Bad Request)
               </SidebarSubLink>
             </SidebarSubContent>
           </SidebarSub>
@@ -241,7 +283,7 @@ const SidebarSubContent = forwardRef<
       className={cn(
         "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
         {
-          "max-w-52": !minified,
+          "max-w-64": !minified,
           "max-w-0": minified,
         },
       )}
@@ -262,9 +304,9 @@ const SidebarSubLink = ({ href, children, isActive }: SidebarSubLinkProps) => {
     <Link
       href={href}
       className={cn(
-        "ml-7 block rounded-r-md border-l-2 py-1 pl-5 text-sm hover:bg-muted hover:text-primary",
+        "ml-7 block rounded-r border-l-[1.5px] py-1 pl-5 text-sm hover:text-primary",
         {
-          "border-primary text-primary": isActive,
+          "border-primary bg-muted text-primary": isActive,
           "text-muted-foreground": !isActive,
         },
       )}
