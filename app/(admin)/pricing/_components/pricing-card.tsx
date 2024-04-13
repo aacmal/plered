@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { IconCheck } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
-
-import style from "./pricing-card.module.css";
 
 interface Props {
   label: string;
@@ -67,7 +65,7 @@ export default function PricingCard({
         <ul className="space-y-1">
           {features.map((feat, index) => (
             <li key={index} className="flex gap-1">
-              <div className={cn(style["check"], "my-2")} />
+              <IconCheck size={15} className="text-green-600" />
               <span className="text-sm text-muted-foreground">{feat}</span>
             </li>
           ))}

@@ -7,6 +7,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import {
   IconCategory,
   IconChevronDown,
+  IconFileDescription,
   IconLock,
   IconMessage,
   IconTags,
@@ -160,7 +161,7 @@ function SidebarContent(props: SidebarProps) {
           <SidebarSub value="pages">
             <SidebarSubTrigger
               minified={minified}
-              icon={<IconLock size={20} />}
+              icon={<IconFileDescription size={20} />}
             >
               Pages
             </SidebarSubTrigger>
