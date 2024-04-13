@@ -1,13 +1,7 @@
 "use client";
 
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from "react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface SidebarContextType {
   minified: boolean;
@@ -33,3 +27,22 @@ export default function SidebarProvider({ children }: { children: ReactNode }) {
 }
 
 export const useSidebar = () => useContext(SidebarContext);
+
+// call this component to set the sidebar to minified in server components
+export function SetMinifiedSidebar() {
+  const { setMinified, minified } = useSidebar();
+  useEffect(() => {
+    const isCurrentMinifiend = minified;
+    setMinified(true);
+
+    // return the sidebar to its original state
+    return () => {
+      if (!isCurrentMinifiend) {
+        setMinified(false);
+      }
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return null;
+}

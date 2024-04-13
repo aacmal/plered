@@ -9,6 +9,7 @@ import {
   IconChevronDown,
   IconLock,
   IconMessage,
+  IconTags,
   IconVocabulary,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -116,6 +117,14 @@ function SidebarContent(props: SidebarProps) {
             minified={minified}
           >
             Orders
+          </SidebarLink>
+          <SidebarLink
+            isActive={pathname.includes("pricing")}
+            icon={<IconTags size={20} />}
+            href="/pricing"
+            minified={minified}
+          >
+            Pricing
           </SidebarLink>
           <SidebarSub value="authentication">
             <SidebarSubTrigger
