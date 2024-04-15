@@ -1,0 +1,37 @@
+$out-of-range-color: hsl(var(--muted-foreground));
+$out-of-range-bg-color: hsl(var(--muted)) !default;
+
+$calendar-border: hsl(var(--border)) !default;
+$cell-border: hsl(var(--border)) !default;
+
+$border-color: hsl(var(--border)) !default;
+
+// Each calendar segment is 1/7th.
+$segment-width: 0.14286% !default;
+
+$time-selection-color: white !default;
+$time-selection-bg-color: rgba(0, 0, 0, 0.5) !default;
+$date-selection-bg-color: rgba(0, 0, 0, 0.1) !default;
+
+$event-bg: #0783f0 !default;
+$event-border: darken(#3174ad, 10%) !default;
+$event-outline: #3b99fc !default;
+$event-color: #fff !default;
+$event-border-radius: 5px !default;
+$event-padding: 2px 5px !default;
+$event-zindex: 4 !default;
+
+$btn-color: hsl(var(--primary-foreground)) !default;
+$btn-bg: hsl(var(--primary)) !default;
+$btn-border: hsl(var(--border)) !default;
+
+$current-time-color: #74ad31 !default;
+
+$rbc-css-prefix: rbc-i !default;
+
+$today-highlight-bg: hsl(var(--primary) / 0.5) !default;
+
+$active-background: $btn-bg;
+$active-border: $btn-border;
+
+
