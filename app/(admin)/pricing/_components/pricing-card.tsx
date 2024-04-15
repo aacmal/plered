@@ -66,7 +66,9 @@ export default function PricingCard({
           {features.map((feat, index) => (
             <li key={index} className="flex gap-1">
               <IconCheck size={15} className="text-green-600" />
-              <span className="text-sm text-muted-foreground">{feat}</span>
+              <span className="flex-1 text-sm text-muted-foreground">
+                {feat}
+              </span>
             </li>
           ))}
         </ul>

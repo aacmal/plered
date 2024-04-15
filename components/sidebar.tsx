@@ -5,6 +5,7 @@ import useMediaQuery from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import {
+  IconCalendarMonth,
   IconCategory,
   IconChevronDown,
   IconFileDescription,
@@ -126,6 +127,14 @@ function SidebarContent(props: SidebarProps) {
             minified={minified}
           >
             Pricing
+          </SidebarLink>
+          <SidebarLink
+            isActive={pathname.includes("calendar")}
+            icon={<IconCalendarMonth size={20} />}
+            href="/calendar"
+            minified={minified}
+          >
+            Calendar
           </SidebarLink>
           <SidebarSub value="authentication">
             <SidebarSubTrigger
