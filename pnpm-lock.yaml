@@ -69,8 +69,8 @@ dependencies:
     specifier: ^18
     version: 18.2.0
   react-big-calendar:
-    specifier: ^1.11.3
-    version: 1.11.3(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.11.6
+    version: 1.11.6(react-dom@18.2.0)(react@18.2.0)
   react-day-picker:
     specifier: ^8.10.0
     version: 8.10.0(date-fns@3.6.0)(react@18.2.0)
@@ -3881,8 +3881,8 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  /react-big-calendar@1.11.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-+vc1ev7VhvOtHY9sgLCgVLmEyQyiIiv3N0if45eqHZtX55wPPRo8WpONXMBvVz3LzfLjS0NwBtYRRcLlLqHoLQ==}
+  /react-big-calendar@1.11.6(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-F8TpYul2pVc6a1TmFGFufwCpRlY55YJgx+JCDjhHnZwD2lwpKiAaDlnOjBPsm3OiijVQBHWUKrZwbli3V4lVyw==}
     peerDependencies:
       react: ^16.14.0 || ^17 || ^18
       react-dom: ^16.14.0 || ^17 || ^18
