@@ -5,8 +5,14 @@ import type { OnSubmitCreateEventProps } from "@/components/calendar/create-even
 import CreateEventDialog from "@/components/calendar/create-event-dialog";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import Wrapper from "@/components/wrapper";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { events } from "./_events";
 
@@ -17,6 +23,10 @@ export default function CalendarClientPage() {
     from?: Date;
     to?: Date;
   }>({ open: false });
+
+  const [selectedEvent, setSelectedEvent] = useState<(typeof events)[0] | null>(
+    null,
+  );
 
   const handleCreateEvent = (data: OnSubmitCreateEventProps) => {
     setMyEvents((prev) => [
@@ -38,6 +48,10 @@ export default function CalendarClientPage() {
       to: slotInfo.end,
     });
   };
+
+  const handleSelectEvent = useCallback((event: (typeof events)[number]) => {
+    setSelectedEvent(event);
+  }, []);
 
   return (
     <>
@@ -63,6 +77,8 @@ export default function CalendarClientPage() {
             selectable
             dayLayoutAlgorithm="no-overlap"
             onSelectSlot={handleSelectSlot}
+            // @ts-expect-error onSelectEvent is not a valid prop
+            onSelectEvent={handleSelectEvent}
           />
         </Card>
       </Wrapper>
@@ -73,6 +89,22 @@ export default function CalendarClientPage() {
           setCreateEventState({ open: state });
         }}
       />
+      <Dialog
+        open={!!selectedEvent}
+        onOpenChange={() => {
+          setSelectedEvent(null);
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{selectedEvent?.title}</DialogTitle>
+          </DialogHeader>
+          <div>
+            <p>Start: {selectedEvent?.start.toLocaleString()}</p>
+            <p>End: {selectedEvent?.end.toLocaleString()}</p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
