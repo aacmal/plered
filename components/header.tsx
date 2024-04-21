@@ -33,12 +33,12 @@ const ModeToggle = dynamic(() => import("./mode-toggle"), {
 });
 
 export default function Header() {
-  const { setMinified, setOpen } = useSidebar();
+  const { setCollapsed, setOpen } = useSidebar();
 
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between border-b bg-card p-3 pr-5">
       <Button
-        onClick={() => setMinified((prev) => !prev)}
+        onClick={() => setCollapsed((prev) => !prev)}
         variant="ghost"
         size="icon"
         className="hidden lg:inline-flex"

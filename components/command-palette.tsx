@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 
 interface Props {
   className?: string;
-  minified?: boolean;
+  collapsed?: boolean;
 }
 export default function CommandPalette(props: Props) {
   const [open, setOpen] = useState(false);
@@ -44,7 +44,7 @@ export default function CommandPalette(props: Props) {
         <IconSearch size={16} className="inline" />
         <span
           className={cn("mx-4", {
-            hidden: props.minified,
+            hidden: props.collapsed,
           })}
         >
           Search...
@@ -53,7 +53,7 @@ export default function CommandPalette(props: Props) {
           className={cn(
             "pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100",
             {
-              hidden: props.minified,
+              hidden: props.collapsed,
             },
           )}
         >

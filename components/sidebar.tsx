@@ -51,7 +51,7 @@ interface SidebarProps {
 }
 function SidebarContent(props: SidebarProps) {
   const pathname = usePathname();
-  const { minified, setMinified } = useSidebar();
+  const { collapsed, setCollapsed } = useSidebar();
   const [accordionState, setAccordionState] = useState<string[]>([]);
 
   useEffect(() => {
@@ -63,14 +63,14 @@ function SidebarContent(props: SidebarProps) {
   }, []);
 
   useEffect(() => {
-    if (minified) {
+    if (collapsed) {
       setAccordionState([]);
     }
-  }, [minified]);
+  }, [collapsed]);
 
   useEffect(() => {
     if (accordionState.length > 0) {
-      setMinified(false);
+      setCollapsed(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accordionState]);
@@ -82,9 +82,9 @@ function SidebarContent(props: SidebarProps) {
           className={cn(
             "mx-auto my-4 overflow-hidden rounded text-center text-lg font-semibold  transition-all",
             {
-              "max-w-[1ch] duration-75": minified,
+              "max-w-[1ch] duration-75": collapsed,
               "max-w-[10ch] bg-primary text-primary-foreground duration-1000":
-                !minified,
+                !collapsed,
             },
           )}
         >
@@ -100,7 +100,7 @@ function SidebarContent(props: SidebarProps) {
             isActive={pathname === "/"}
             icon={<IconCategory size={20} />}
             href="/"
-            minified={minified}
+            collapsed={collapsed}
           >
             Dashboard
           </SidebarLink>
@@ -108,7 +108,7 @@ function SidebarContent(props: SidebarProps) {
             isActive={pathname.includes("messages")}
             icon={<IconMessage size={20} />}
             href="/messages"
-            minified={minified}
+            collapsed={collapsed}
           >
             Messages
           </SidebarLink>
@@ -116,7 +116,7 @@ function SidebarContent(props: SidebarProps) {
             isActive={pathname.includes("orders")}
             icon={<IconVocabulary size={20} />}
             href="/orders"
-            minified={minified}
+            collapsed={collapsed}
           >
             Orders
           </SidebarLink>
@@ -124,7 +124,7 @@ function SidebarContent(props: SidebarProps) {
             isActive={pathname.includes("pricing")}
             icon={<IconTags size={20} />}
             href="/pricing"
-            minified={minified}
+            collapsed={collapsed}
           >
             Pricing
           </SidebarLink>
@@ -132,13 +132,13 @@ function SidebarContent(props: SidebarProps) {
             isActive={pathname.includes("calendar")}
             icon={<IconCalendarMonth size={20} />}
             href="/calendar"
-            minified={minified}
+            collapsed={collapsed}
           >
             Calendar
           </SidebarLink>
           <SidebarSub value="authentication">
             <SidebarSubTrigger
-              minified={minified}
+              collapsed={collapsed}
               icon={<IconLock size={20} />}
             >
               Authentication
@@ -169,7 +169,7 @@ function SidebarContent(props: SidebarProps) {
           </SidebarSub>
           <SidebarSub value="pages">
             <SidebarSubTrigger
-              minified={minified}
+              collapsed={collapsed}
               icon={<IconFileDescription size={20} />}
             >
               Pages
@@ -209,7 +209,7 @@ function SidebarContent(props: SidebarProps) {
 
 interface SidebarLinkProps {
   isActive?: boolean;
-  minified?: boolean;
+  collapsed?: boolean;
   icon: ReactNode;
   href: string;
   children: ReactNode;
@@ -221,8 +221,8 @@ function SidebarLink(props: SidebarLinkProps) {
       className={cn(
         "h-auto w-full justify-center gap-2 rounded-lg py-3 transition-all",
         {
-          "lg:gap-2": !props.minified,
-          "lg:gap-0": props.minified,
+          "lg:gap-2": !props.collapsed,
+          "lg:gap-0": props.collapsed,
           "text-muted-foreground": !props.isActive,
         },
       )}
@@ -234,8 +234,8 @@ function SidebarLink(props: SidebarLinkProps) {
           className={cn(
             "block w-full overflow-hidden transition-all ease-in-out",
             {
-              "lg:w-0": props.minified,
-              "lg:w-52": !props.minified,
+              "lg:w-0": props.collapsed,
+              "lg:w-52": !props.collapsed,
             },
           )}
         >
@@ -257,9 +257,9 @@ const SidebarSubTrigger = forwardRef<
   ElementRef<typeof AccordionPrimitive.Trigger>,
   ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
     icon: ReactNode;
-    minified?: boolean;
+    collapsed?: boolean;
   }
->(({ children, icon, minified, ...props }, ref) => (
+>(({ children, icon, collapsed, ...props }, ref) => (
   <AccordionPrimitive.Header>
     <AccordionPrimitive.Trigger ref={ref} asChild {...props}>
       <Button
@@ -267,8 +267,8 @@ const SidebarSubTrigger = forwardRef<
         className={cn(
           "group h-auto w-full gap-2 py-3 text-start text-muted-foreground transition-all data-[state=open]:text-primary",
           {
-            "lg:gap-2": !minified,
-            "lg:gap-0": minified,
+            "lg:gap-2": !collapsed,
+            "lg:gap-0": collapsed,
           },
         )}
       >
@@ -277,8 +277,8 @@ const SidebarSubTrigger = forwardRef<
           className={cn(
             "flex w-full items-center overflow-hidden transition-all ease-in-out",
             {
-              "lg:w-0": minified,
-              "lg:w-52": !minified,
+              "lg:w-0": collapsed,
+              "lg:w-52": !collapsed,
             },
           )}
         >
@@ -295,15 +295,15 @@ const SidebarSubContent = forwardRef<
   ElementRef<typeof AccordionPrimitive.Content>,
   ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
-  const { minified } = useSidebar();
+  const { collapsed } = useSidebar();
   return (
     <AccordionPrimitive.Content
       ref={ref}
       className={cn(
         "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
         {
-          "max-w-64": !minified,
-          "max-w-0": minified,
+          "max-w-64": !collapsed,
+          "max-w-0": collapsed,
         },
       )}
       {...props}

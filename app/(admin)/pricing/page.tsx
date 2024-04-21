@@ -1,5 +1,5 @@
 import Wrapper from "@/components/wrapper";
-import { SetMinifiedSidebar } from "@/context/sidebar-ctx";
+import { SetCollapsedSidebar } from "@/context/sidebar-ctx";
 import React from "react";
 
 import PricingCard from "./_components/pricing-card";
@@ -7,7 +7,7 @@ import PricingCard from "./_components/pricing-card";
 export default function PricingTable() {
   return (
     <Wrapper>
-      <SetMinifiedSidebar />
+      <SetCollapsedSidebar />
       <h2 className="text-center text-3xl font-semibold">
         Choose the plan that works for you
       </h2>

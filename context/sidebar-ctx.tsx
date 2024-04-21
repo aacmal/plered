@@ -4,8 +4,8 @@ import type { Dispatch, ReactNode, SetStateAction } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface SidebarContextType {
-  minified: boolean;
-  setMinified: Dispatch<SetStateAction<boolean>>;
+  collapsed: boolean;
+  setCollapsed: Dispatch<SetStateAction<boolean>>;
 
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -14,13 +14,13 @@ interface SidebarContextType {
 const SidebarContext = createContext({} as SidebarContextType);
 
 export default function SidebarProvider({ children }: { children: ReactNode }) {
-  const [minified, setMinified] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   // for mobile sidebar
   const [open, setOpen] = useState(false);
 
   return (
-    <SidebarContext.Provider value={{ minified, setMinified, open, setOpen }}>
+    <SidebarContext.Provider value={{ collapsed, setCollapsed, open, setOpen }}>
       {children}
     </SidebarContext.Provider>
   );
@@ -28,17 +28,17 @@ export default function SidebarProvider({ children }: { children: ReactNode }) {
 
 export const useSidebar = () => useContext(SidebarContext);
 
-// call this component to set the sidebar to minified in server components
-export function SetMinifiedSidebar() {
-  const { setMinified, minified } = useSidebar();
+// call this component to set the sidebar to collapsed in server components
+export function SetCollapsedSidebar() {
+  const { setCollapsed, collapsed } = useSidebar();
   useEffect(() => {
-    const isCurrentMinifiend = minified;
-    setMinified(true);
+    const isCurrentMinifiend = collapsed;
+    setCollapsed(true);
 
     // return the sidebar to its original state
     return () => {
       if (!isCurrentMinifiend) {
-        setMinified(false);
+        setCollapsed(false);
       }
     };
 
