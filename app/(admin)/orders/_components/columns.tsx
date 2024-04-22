@@ -1,5 +1,14 @@
 "use client";
 
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,14 +18,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import {
   IconArrowsUpDown,
   IconClipboardList,
   IconDots,
   IconFileDescription,
+  IconX,
 } from "@tabler/icons-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import { useState } from "react";
 
 const statusColors = {
   processing:
@@ -118,37 +130,63 @@ export const columns: ColumnDef<Order>[] = [
   {
     id: "actions",
     header: "Action",
-    cell: ({ row }) => {
+    cell: function Actions({ row }) {
       const order = row.original;
+      const [cancelState, setCancelState] = useState(false);
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <IconDots className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" side="left">
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(order.orderId)}
-            >
-              <IconClipboardList className="mr-2 h-4 w-4" />
-              Copy order ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            {/* <DropdownMenuItem>
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <IconDots className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" side="left">
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(order.orderId)}
+              >
+                <IconClipboardList className="mr-2 h-4 w-4" />
+                Copy order ID
+              </DropdownMenuItem>
+              {/* <DropdownMenuItem>
               <IconUser className="mr-2 h-4 w-4" />
               View customer
             </DropdownMenuItem> */}
-            <DropdownMenuItem asChild>
-              <Link href={`/orders/${order.orderId}`}>
-                <IconFileDescription className="mr-2 h-4 w-4" />
-                View order details
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <DropdownMenuItem asChild>
+                <Link href={`/orders/${order.orderId}`}>
+                  <IconFileDescription className="mr-2 h-4 w-4" />
+                  View order details
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => setCancelState(true)}>
+                <IconX className="mr-2 h-4 w-4" />
+                Cancel order
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <AlertDialog open={cancelState} onOpenChange={setCancelState}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Cancel order</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to cancel order with id {order.orderId}?
+                  This action cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction asChild>
+                  <Button variant="destructive">Commit</Button>
+                </AlertDialogAction>
+                <AlertDialogCancel asChild>
+                  <Button variant="ghost">Cancel</Button>
+                </AlertDialogCancel>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </>
       );
     },
   },
