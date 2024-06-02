@@ -9,6 +9,7 @@ import {
   IconCategory,
   IconChevronDown,
   IconFileDescription,
+  IconLetterCase,
   IconLock,
   IconMessage,
   IconTags,
@@ -135,6 +136,14 @@ function SidebarContent(props: SidebarProps) {
             collapsed={collapsed}
           >
             Calendar
+          </SidebarLink>
+          <SidebarLink
+            isActive={pathname.includes("text-editor")}
+            icon={<IconLetterCase size={20} />}
+            href="/text-editor"
+            collapsed={collapsed}
+          >
+            Text Editor
           </SidebarLink>
           <SidebarSub value="authentication">
             <SidebarSubTrigger

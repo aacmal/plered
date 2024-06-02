@@ -50,6 +50,10 @@
 }
 
 @layer base {
+  .post {
+    @apply prose prose-headings:my-2 prose-h1:my-5 prose-p:my-1 prose-hr:my-3 max-w-none !break-all outline-none;
+  }
+
   * {
     @apply border-border;
   }

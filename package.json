@@ -2,7 +2,7 @@
   "name": "plered",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@8.11.0",
+  "packageManager": "pnpm@9.1.4",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,11 +19,16 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tabler/icons-react": "^3.1.0",
     "@tanstack/react-table": "^8.15.3",
+    "@tiptap/extension-underline": "^2.4.0",
+    "@tiptap/pm": "^2.4.0",
+    "@tiptap/react": "^2.4.0",
+    "@tiptap/starter-kit": "^2.4.0",
     "@types/ua-parser-js": "^0.7.39",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -44,6 +49,7 @@
     "vaul": "^0.9.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20",
     "@types/react": "^18",
