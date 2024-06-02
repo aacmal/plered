@@ -14,7 +14,6 @@ import {
   IconH2,
   IconH3,
   IconH4,
-  IconHeading,
   IconItalic,
   IconList,
   IconListNumbers,
