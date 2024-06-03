@@ -18,7 +18,7 @@ export default function SubHeader() {
   return (
     <div className="flex items-center justify-between bg-inherit px-5 py-3 pb-0">
       <h1 className="text-lg font-semibold capitalize text-secondary-foreground lg:text-2xl">
-        {paths[0] ?? "Dashboard"}
+        {paths[0]?.replace("-", " ") ?? "Dashboard"}
       </h1>
       <Breadcrumb>
         <BreadcrumbList>
