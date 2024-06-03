@@ -45,7 +45,7 @@ export default function TextEditor({
     },
     editorProps: {
       attributes: {
-        class: cn("post dark:prose-invert p-2", {
+        class: cn("post p-2 dark:prose-invert", {
           "min-h-[10rem]": height === "big",
         }),
       },
@@ -61,7 +61,10 @@ export default function TextEditor({
 
   return (
     <div
-      className={cn("min-h-[5rem] w-full rounded-lg border", props.className)}
+      className={cn(
+        "min-h-[5rem] w-full rounded-lg border bg-card",
+        props.className,
+      )}
     >
       <MenuBar editor={editor} />
       <Separator />
