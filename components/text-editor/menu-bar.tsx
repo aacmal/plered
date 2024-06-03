@@ -184,9 +184,9 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           </Button>
           <Button
             onClick={() => editor.chain().focus().setHorizontalRule().run()}
-            label="Heading 4"
+            label="Horizontal Rule"
           >
-            <div className="h-[2px] w-4 bg-black" />
+            <div className="h-[2px] w-4 bg-foreground" />
           </Button>
           <Button
             onClick={() => editor.commands.clearNodes()}
