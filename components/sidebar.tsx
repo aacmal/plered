@@ -30,7 +30,14 @@ import { Sheet, SheetContent } from "./ui/sheet";
 
 export default function Sidebar() {
   const { open, setOpen } = useSidebar();
+  const pathname = usePathname();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  useEffect(() => {
+    if (!isDesktop) {
+      setOpen(false);
+    }
+  }, [pathname]);
 
   if (!isDesktop) {
     return (
