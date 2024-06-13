@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React, {
   forwardRef,
   useEffect,
@@ -54,11 +55,14 @@ export default forwardRef((props, ref) => {
   }));
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-start rounded-lg border  bg-accent p-2">
       {props.items.length ? (
         props.items.map((item, index) => (
           <button
-            className={index === selectedIndex ? "bg-blue-500" : ""}
+            className={cn(
+              "w-full rounded px-1 text-left text-sm",
+              index === selectedIndex ? "bg-blue-500" : "",
+            )}
             key={index}
             onClick={() => selectItem(index)}
           >

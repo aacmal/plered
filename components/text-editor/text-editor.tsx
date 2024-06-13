@@ -23,6 +23,9 @@ const extensions = [
   }),
   Mention.configure({
     suggestion: suggestion,
+    HTMLAttributes: {
+      class: "px-1 rounded bg-accent border",
+    },
   }),
 ];
 
