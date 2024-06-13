@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Mention from "@tiptap/extension-mention";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -6,6 +7,7 @@ import React, { useEffect } from "react";
 
 import { Separator } from "../ui/separator";
 import MenuBar from "./menu-bar";
+import suggestion from "./suggestion";
 
 const extensions = [
   Underline,
@@ -18,6 +20,9 @@ const extensions = [
       keepMarks: true,
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
     },
+  }),
+  Mention.configure({
+    suggestion: suggestion,
   }),
 ];
 
