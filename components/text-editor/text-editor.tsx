@@ -1,32 +1,26 @@
 import { cn } from "@/lib/utils";
-import Mention from "@tiptap/extension-mention";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React, { useEffect } from "react";
 
 import { Separator } from "../ui/separator";
+import Mention from "./extensions/mention";
 import MenuBar from "./menu-bar";
-import suggestion from "./suggestion";
 
 const extensions = [
   Underline,
   StarterKit.configure({
     bulletList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
     orderedList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
   }),
-  Mention.configure({
-    suggestion: suggestion,
-    HTMLAttributes: {
-      class: "px-1 rounded bg-accent border",
-    },
-  }),
+  Mention,
 ];
 
 interface TextEditorProps {

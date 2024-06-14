@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { cn } from "@/lib/utils";
 import React, {
   forwardRef,
@@ -6,10 +13,13 @@ import React, {
   useState,
 } from "react";
 
-export default forwardRef((props, ref) => {
+export default forwardRef(function MentionList(
+  props: Record<string, any>,
+  ref,
+) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const selectItem = (index) => {
+  const selectItem = (index: number) => {
     const item = props.items[index];
 
     if (item) {
@@ -34,7 +44,7 @@ export default forwardRef((props, ref) => {
   useEffect(() => setSelectedIndex(0), [props.items]);
 
   useImperativeHandle(ref, () => ({
-    onKeyDown: ({ event }) => {
+    onKeyDown: ({ event }: { event: React.KeyboardEvent }) => {
       if (event.key === "ArrowUp") {
         upHandler();
         return true;
@@ -57,7 +67,7 @@ export default forwardRef((props, ref) => {
   return (
     <div className="flex flex-col items-start rounded-lg border  bg-accent p-2">
       {props.items.length ? (
-        props.items.map((item, index) => (
+        props.items.map((item: string, index: number) => (
           <button
             className={cn(
               "w-full rounded px-1 text-left text-sm",
