@@ -10,10 +10,6 @@ import {
   IconArrowForwardUp,
   IconBold,
   IconEraser,
-  IconH1,
-  IconH2,
-  IconH3,
-  IconH4,
   IconItalic,
   IconList,
   IconListNumbers,
@@ -26,28 +22,47 @@ import {
 import type { Editor } from "@tiptap/react";
 import type { ButtonHTMLAttributes } from "react";
 
+import { Separator } from "../ui/separator";
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   label: string;
+  labelClassNames?: string;
 }
-const Button = ({ children, active, ...props }: ButtonProps) => {
+const Button = ({
+  children,
+  active,
+  className,
+  labelClassNames,
+  ...props
+}: ButtonProps) => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
         <button
           type="button"
-          className={cn("rounded-md p-2 text-foreground hover:bg-accent", {
-            "bg-accent": active,
-          })}
+          className={cn(
+            "h-9 w-9 rounded-md p-2 text-foreground hover:bg-accent",
+            {
+              "bg-accent": active,
+            },
+            className,
+          )}
           {...props}
         >
           {children}
         </button>
       </TooltipTrigger>
-      <TooltipContent className="font-medium">{props.label}</TooltipContent>
+      <TooltipContent sideOffset={10}>
+        <p className={cn("text-xs", labelClassNames)}>{props.label}</p>
+      </TooltipContent>
     </Tooltip>
   );
 };
+
+const MenuSeparator = () => (
+  <Separator className="mx-3 h-5" orientation="vertical" />
+);
 
 interface MenuBarProps {
   editor: Editor | null;
@@ -59,46 +74,72 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   }
   return (
     <TooltipProvider>
-      <div className="flex flex-wrap gap-1 px-2 py-1 text-slate-700">
+      <div className="flex flex-wrap items-center gap-1 px-2 py-1 text-slate-700">
+        <Button
+          onClick={() => editor.chain().focus().undo().run()}
+          disabled={!editor.can().chain().focus().undo().run()}
+          label="Undo"
+        >
+          <IconArrowBackUp size={20} />
+        </Button>
+        <Button
+          onClick={() => editor.chain().focus().redo().run()}
+          disabled={!editor.can().chain().focus().redo().run()}
+          label="Redo"
+        >
+          <IconArrowForwardUp size={20} />
+        </Button>
+        <Button
+          onClick={() => editor.commands.clearNodes()}
+          label="Clear Formatting"
+        >
+          <IconEraser size={20} />
+        </Button>
+        <MenuSeparator />
         <Button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
           active={editor.isActive("bold")}
           label="Bold"
+          labelClassNames="font-bold"
         >
-          <IconBold />
+          <IconBold size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           active={editor.isActive("italic")}
           label="Italic"
+          labelClassNames="italic"
         >
-          <IconItalic />
+          <IconItalic size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
           active={editor.isActive("strike")}
           label="Strikethrough"
+          labelClassNames="line-through"
         >
-          <IconStrikethrough />
+          <IconStrikethrough size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           disabled={!editor.can().chain().focus().toggleUnderline().run()}
           active={editor.isActive("underline")}
           label="Underline"
+          labelClassNames="underline"
         >
-          <IconUnderline />
+          <IconUnderline size={20} />
         </Button>
+        <MenuSeparator />
         <Button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           disabled={!editor.can().chain().focus().toggleBulletList().run()}
           active={editor.isActive("bulletList")}
           label="Bullets List"
         >
-          <IconList />
+          <IconList size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -106,14 +147,14 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           active={editor.isActive("orderedList")}
           label="Numbering List"
         >
-          <IconListNumbers />
+          <IconListNumbers size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().setParagraph().run()}
           active={editor.isActive("paragraph")}
           label="Paragraph"
         >
-          <IconTypography />
+          <IconTypography size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -121,21 +162,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           active={editor.isActive("blockquote")}
           label="Block Quote"
         >
-          <IconQuote />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().chain().focus().undo().run()}
-          label="Undo"
-        >
-          <IconArrowBackUp />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().chain().focus().redo().run()}
-          label="Redo"
-        >
-          <IconArrowForwardUp />
+          <IconQuote size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -143,56 +170,14 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           active={editor.isActive("codeBlock")}
           label="Code"
         >
-          <IconSourceCode />
+          <IconSourceCode size={20} />
         </Button>
         <div className="flex border-l">
-          <Button
-            onClick={() =>
-              editor.chain().focus().setHeading({ level: 1 }).run()
-            }
-            active={editor.isActive("heading", { level: 1 })}
-            label="Heading 1"
-          >
-            <IconH1 />
-          </Button>
-          <Button
-            onClick={() =>
-              editor.chain().focus().setHeading({ level: 2 }).run()
-            }
-            active={editor.isActive("heading", { level: 2 })}
-            label="Heading 2"
-          >
-            <IconH2 />
-          </Button>
-          <Button
-            onClick={() =>
-              editor.chain().focus().setHeading({ level: 3 }).run()
-            }
-            active={editor.isActive("heading", { level: 3 })}
-            label="Heading 3"
-          >
-            <IconH3 />
-          </Button>
-          <Button
-            onClick={() =>
-              editor.chain().focus().setHeading({ level: 4 }).run()
-            }
-            active={editor.isActive("heading", { level: 4 })}
-            label="Heading 4"
-          >
-            <IconH4 />
-          </Button>
           <Button
             onClick={() => editor.chain().focus().setHorizontalRule().run()}
             label="Horizontal Rule"
           >
             <div className="h-[2px] w-4 bg-foreground" />
-          </Button>
-          <Button
-            onClick={() => editor.commands.clearNodes()}
-            label="Clear Formatting"
-          >
-            <IconEraser />
           </Button>
         </div>
       </div>
