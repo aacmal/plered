@@ -5,6 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import React, { useEffect } from "react";
 
 import { Separator } from "../ui/separator";
+import Mention from "./extensions/mention";
 import MenuBar from "./menu-bar";
 
 const extensions = [
@@ -12,13 +13,14 @@ const extensions = [
   StarterKit.configure({
     bulletList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
     orderedList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
   }),
+  Mention,
 ];
 
 interface TextEditorProps {
