@@ -1,4 +1,8 @@
 import { cn } from "@/lib/utils";
+import { Color } from "@tiptap/extension-color";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import TextStyle from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -21,6 +25,10 @@ const extensions = [
     },
   }),
   Mention,
+  Color,
+  TextStyle,
+  Subscript,
+  Superscript,
 ];
 
 interface TextEditorProps {

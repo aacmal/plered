@@ -13,15 +13,18 @@ import {
   IconItalic,
   IconList,
   IconListNumbers,
+  IconPaletteOff,
   IconQuote,
   IconSourceCode,
   IconStrikethrough,
-  IconTypography,
+  IconSubscript,
+  IconSuperscript,
   IconUnderline,
 } from "@tabler/icons-react";
 import type { Editor } from "@tiptap/react";
 import type { ButtonHTMLAttributes } from "react";
 
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Select,
   SelectContent,
@@ -62,7 +65,9 @@ const Button = ({
         </button>
       </TooltipTrigger>
       <TooltipContent sideOffset={10}>
-        <p className={cn("text-xs", labelClassNames)}>{props.label}</p>
+        <p className={cn("text-xs capitalize", labelClassNames)}>
+          {props.label}
+        </p>
       </TooltipContent>
     </Tooltip>
   );
@@ -71,6 +76,26 @@ const Button = ({
 const MenuSeparator = () => (
   <Separator className="mx-3 h-5" orientation="vertical" />
 );
+
+const COLOR_LIST = [
+  "yellow",
+  "red",
+  "blue",
+  "green",
+  "purple",
+  "pink",
+  "grey",
+  "cyan",
+  "teal",
+  "skyblue",
+  "lime",
+  "orange",
+  "indigo",
+  "violet",
+  "fuchsia",
+  "gold",
+  "brown",
+];
 
 interface MenuBarProps {
   editor: Editor | null;
@@ -113,6 +138,11 @@ const MenuBar = ({ editor }: MenuBarProps) => {
     } else {
       return "paragraph";
     }
+  }
+
+  function currentColor() {
+    const attr = editor?.getAttributes("textStyle");
+    return (attr?.color as string) ?? "";
   }
 
   return (
@@ -208,6 +238,44 @@ const MenuBar = ({ editor }: MenuBarProps) => {
             </SelectItem>
           </SelectContent>
         </Select>
+        <Popover>
+          <Button label="Color" className="border p-1">
+            <PopoverTrigger asChild>
+              <div
+                style={{
+                  backgroundColor: currentColor(),
+                }}
+                className="h-full w-full rounded-md border bg-foreground"
+              />
+            </PopoverTrigger>
+          </Button>
+          <PopoverContent className="grid grid-cols-5 gap-1">
+            <Button
+              onClick={() => editor.commands.unsetColor()}
+              label="Default"
+              className={cn("h-5 w-5 rounded p-0")}
+            >
+              <IconPaletteOff size={20} />
+            </Button>
+            {COLOR_LIST.map((color) => (
+              <Button
+                key={color}
+                onClick={() => editor.commands.setColor(color)}
+                label={color}
+                className={cn("h-5 w-5 rounded p-0", {
+                  "border border-primary": editor.isActive("textStyle", {
+                    color,
+                  }),
+                })}
+              >
+                <div
+                  style={{ backgroundColor: color }}
+                  className="h-full w-full rounded-md"
+                />
+              </Button>
+            ))}
+          </PopoverContent>
+        </Popover>
         <Button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           disabled={!editor.can().chain().focus().toggleBulletList().run()}
@@ -225,11 +293,20 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           <IconListNumbers size={20} />
         </Button>
         <Button
-          onClick={() => editor.chain().focus().setParagraph().run()}
-          active={editor.isActive("paragraph")}
-          label="Paragraph"
+          onClick={() => editor.commands.toggleSuperscript()}
+          disabled={!editor.can().chain().focus().toggleSuperscript().run()}
+          active={editor.isActive("superscript")}
+          label="Superscript"
         >
-          <IconTypography size={20} />
+          <IconSuperscript size={20} />
+        </Button>
+        <Button
+          onClick={() => editor.commands.toggleSubscript()}
+          disabled={!editor.can().chain().focus().toggleSubscript().run()}
+          active={editor.isActive("subscript")}
+          label="Subscript"
+        >
+          <IconSubscript size={20} />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
