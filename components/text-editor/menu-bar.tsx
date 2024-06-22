@@ -10,20 +10,29 @@ import {
   IconArrowForwardUp,
   IconBold,
   IconEraser,
+  IconHighlight,
   IconItalic,
   IconList,
   IconListNumbers,
   IconPaletteOff,
+  IconPlus,
   IconQuote,
   IconSourceCode,
   IconStrikethrough,
   IconSubscript,
   IconSuperscript,
+  IconTypography,
   IconUnderline,
 } from "@tabler/icons-react";
 import type { Editor } from "@tiptap/react";
 import type { ButtonHTMLAttributes } from "react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Select,
@@ -145,6 +154,12 @@ const MenuBar = ({ editor }: MenuBarProps) => {
     return (attr?.color as string) ?? "";
   }
 
+  function currentHighlightColor() {
+    const attr = editor?.getAttributes("highlight");
+    console.log(attr);
+    return (attr?.color as string) ?? "";
+  }
+
   return (
     <TooltipProvider>
       <div className="flex flex-wrap items-center gap-1 px-2 py-1 text-slate-700">
@@ -207,11 +222,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         </Button>
         <MenuSeparator />
         <Select onValueChange={typeOnChange} value={currentType()}>
-          <Button
-            label="Heading"
-            className="w-fit p-0"
-            labelClassNames="font-bold"
-          >
+          <Button label="Typography" className="w-fit p-0">
             <SelectTrigger className="h-9 w-fit gap-3 bg-card">
               <SelectValue placeholder="Paragraph" className="text-sm" />
             </SelectTrigger>
@@ -220,33 +231,36 @@ const MenuBar = ({ editor }: MenuBarProps) => {
             align="center"
             className="prose prose-headings:my-0 prose-p:my-0 dark:text-foreground"
           >
-            <SelectItem value="paragraph">
-              <p>Paragraph</p>
-            </SelectItem>
-            <SelectSeparator />
-            <SelectItem value="heading-4">
-              <h4 className="text-foreground">Heading 4</h4>
-            </SelectItem>
-            <SelectItem value="heading-3">
-              <h3 className="text-foreground">Heading 3</h3>
+            <SelectItem value="heading-1">
+              <h1 className="text-foreground">Heading 1</h1>
             </SelectItem>
             <SelectItem value="heading-2">
               <h2 className="text-foreground">Heading 2</h2>
             </SelectItem>
-            <SelectItem value="heading-1">
-              <h1 className="text-foreground">Heading 1</h1>
+            <SelectItem value="heading-3">
+              <h3 className="text-foreground">Heading 3</h3>
+            </SelectItem>
+            <SelectItem value="heading-4">
+              <h4 className="text-foreground">Heading 4</h4>
+            </SelectItem>
+            <SelectSeparator />
+            <SelectItem value="paragraph">
+              <p>Paragraph</p>
             </SelectItem>
           </SelectContent>
         </Select>
         <Popover>
           <Button label="Color" className="border p-1">
             <PopoverTrigger asChild>
-              <div
-                style={{
-                  backgroundColor: currentColor(),
-                }}
-                className="h-full w-full rounded-md border bg-foreground"
-              />
+              <div className="flex flex-col items-center gap-1">
+                <IconTypography size={18} />
+                <div
+                  style={{
+                    backgroundColor: currentColor(),
+                  }}
+                  className="h-[2px] w-full rounded-full bg-foreground"
+                />
+              </div>
             </PopoverTrigger>
           </Button>
           <PopoverContent className="grid grid-cols-5 gap-1">
@@ -264,6 +278,51 @@ const MenuBar = ({ editor }: MenuBarProps) => {
                 label={color}
                 className={cn("h-5 w-5 rounded p-0", {
                   "border border-primary": editor.isActive("textStyle", {
+                    color,
+                  }),
+                })}
+              >
+                <div
+                  style={{ backgroundColor: color }}
+                  className="h-full w-full rounded-md"
+                />
+              </Button>
+            ))}
+          </PopoverContent>
+        </Popover>
+        <Popover>
+          <Button label="Highlight" className="border p-1">
+            <PopoverTrigger asChild>
+              <div className="flex flex-col items-center gap-1">
+                <IconHighlight size={18} />
+                <div
+                  style={{
+                    backgroundColor: currentHighlightColor(),
+                  }}
+                  className="h-[2px] w-full rounded-full bg-foreground"
+                />
+              </div>
+            </PopoverTrigger>
+          </Button>
+          <PopoverContent className="grid grid-cols-5 gap-1">
+            <Button
+              onClick={() => editor.commands.unsetHighlight()}
+              label="Default"
+              className={cn("h-5 w-5 rounded p-0")}
+            >
+              <IconPaletteOff size={20} />
+            </Button>
+            {COLOR_LIST.map((color) => (
+              <Button
+                key={color}
+                onClick={() =>
+                  editor.commands.setHighlight({
+                    color,
+                  })
+                }
+                label={color}
+                className={cn("h-5 w-5 rounded p-0", {
+                  "border border-primary": editor.isActive("highlight", {
                     color,
                   }),
                 })}
@@ -324,14 +383,27 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         >
           <IconSourceCode size={20} />
         </Button>
-        <div className="flex border-l">
-          <Button
-            onClick={() => editor.chain().focus().setHorizontalRule().run()}
-            label="Horizontal Rule"
-          >
-            <div className="h-[2px] w-4 bg-foreground" />
+        <MenuSeparator />
+        <DropdownMenu>
+          <Button label="Insert Item" className="w-fit p-0">
+            <DropdownMenuTrigger className="flex h-9 items-center gap-1 rounded-md border bg-card px-2 text-sm">
+              <IconPlus size={20} />
+              Insert
+            </DropdownMenuTrigger>
           </Button>
-        </div>
+          <DropdownMenuContent
+            align="center"
+            className="prose prose-headings:my-0 prose-p:my-0 dark:text-foreground"
+          >
+            <DropdownMenuItem
+              onClick={() => editor.chain().focus().setHorizontalRule().run()}
+              className="flex gap-2"
+            >
+              <div className="h-px w-4 bg-foreground" />
+              <p className="text-foreground">Horizontal line</p>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </TooltipProvider>
   );

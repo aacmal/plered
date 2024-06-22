@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Color } from "@tiptap/extension-color";
+import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import TextStyle from "@tiptap/extension-text-style";
@@ -29,6 +30,12 @@ const extensions = [
   TextStyle,
   Subscript,
   Superscript,
+  Highlight.configure({
+    multicolor: true,
+    HTMLAttributes: {
+      class: "!text-white",
+    },
+  }),
 ];
 
 interface TextEditorProps {
