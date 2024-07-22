@@ -19,5 +19,17 @@
     "typescriptreact",
     "javascript",
     "javascriptreact"
+  ],
+  "cSpell.words": [
+    "clsx",
+    "cmdk",
+    "lucide",
+    "plered",
+    "tabler",
+    "tailwindcss",
+    "tanstack",
+    "tiptap",
+    "trivago",
+    "vaul"
   ]
 }
