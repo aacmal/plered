@@ -33,7 +33,7 @@ const extensions = [
   Highlight.configure({
     multicolor: true,
     HTMLAttributes: {
-      class: "!text-white",
+      class: "text-inherit",
     },
   }),
 ];
