@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import CodeBlockLowLight from "@tiptap/extension-code-block-lowlight";
 import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
@@ -7,11 +8,21 @@ import TextStyle from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import css from "highlight.js/lib/languages/css";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
+import html from "highlight.js/lib/languages/xml";
+import { lowlight } from "lowlight";
 import React, { useEffect } from "react";
 
 import { Separator } from "../ui/separator";
 import Mention from "./extensions/mention";
 import MenuBar from "./menu-bar";
+
+lowlight.registerLanguage("html", html);
+lowlight.registerLanguage("css", css);
+lowlight.registerLanguage("js", js);
+lowlight.registerLanguage("ts", ts);
 
 const extensions = [
   Underline,
@@ -35,6 +46,9 @@ const extensions = [
     HTMLAttributes: {
       class: "text-inherit",
     },
+  }),
+  CodeBlockLowLight.configure({
+    lowlight,
   }),
 ];
 
